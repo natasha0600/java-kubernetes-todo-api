@@ -1,11 +1,11 @@
-# --- 1. Deployment: Gerencia as cópias do seu contêiner ---
+# --- 1. Deployment: Gerencia as cópias do contêiner ---
 # O Deployment garante que a aplicação esteja sempre rodando e define o número de réplicas.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: todo-list-deployment
 spec:
-  replicas: 2 # Kubernetes manterá 2 cópias (pods) da sua API rodando
+  replicas: 2 # Kubernetes manterá 2 cópias (pods) da API rodando
   selector:
     matchLabels:
       app: todo-app
@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: todo-java-container
-          # IMAGEM DO SEU DOCKER HUB:
+          # IMAGEM DO DOCKER HUB:
           image: natasha0600/todo-java-k8s:v1
           ports:
             - containerPort: 8080 # A porta interna do Spring Boot
@@ -32,6 +32,6 @@ spec:
   selector:
     app: todo-app
   ports:
-    - port: 8080         # A porta que você acessará fora do cluster
-      targetPort: 8080   # A porta interna do seu contêiner
-  type: LoadBalancer # Permite acessar a aplicação facilmente do seu PC
+    - port: 8080         # A porta que acessará fora do cluster
+      targetPort: 8080   # A porta interna do contêiner
+  type: LoadBalancer # Permite acessar a aplicação facilmente do PC
